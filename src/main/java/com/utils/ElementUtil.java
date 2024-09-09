@@ -14,21 +14,25 @@ import com.enums.WaitStrategy;
 
 public final class ElementUtil {
 
-	private WebDriver driver;
+	public WebDriver driver;
 
-	private ElementUtil() {
-		this.driver = DriverManager.getDriver();
+	public ElementUtil(WebDriver driver) {
+		this.driver = driver;
 	}
 
-	protected String getPageTitle() {
+	public String getPageTitle() {
 		return driver.getTitle();
 	}
 
-	protected String getPageURL() {
+	public String getPageURL() {
 		return driver.getCurrentUrl();
 	}
+	
+	public boolean isElementAvailable(By locator) {
+		return explicitlyWaitPresence(locator).isDisplayed();
+	}
 
-	protected void elementClick(By locator, WaitStrategy waitStrategy) {
+	public void elementClick(By locator, WaitStrategy waitStrategy) {
 		if (waitStrategy == WaitStrategy.CLICKABLE) {
 			explicitlyWaitClickable(locator).click();
 		} else if (waitStrategy == WaitStrategy.PRESENCE) {
@@ -39,7 +43,7 @@ public final class ElementUtil {
 
 	}
 
-	protected void elementSendKeys(By locator, String value, WaitStrategy waitStrategy) {
+	public void elementSendKeys(By locator, String value, WaitStrategy waitStrategy) {
 		if (waitStrategy == WaitStrategy.PRESENCE) {
 			explicitlyWaitPresence(locator).sendKeys(value);
 		} else if (waitStrategy == WaitStrategy.VISIBLE) {
@@ -49,12 +53,12 @@ public final class ElementUtil {
 		}
 	}
 
-	protected String getElementText(By locator) {
+	public String getElementText(By locator) {
 		return driver.findElement(locator).getText();
 	}
 
-	protected String getElementAttributeValue(By locator, String sttribute) {
-		return driver.findElement(locator).getAttribute(sttribute);
+	public String getElementAttributeValue(By locator, String attribute) {
+		return driver.findElement(locator).getAttribute(attribute);
 	}
 
 	private WebElement explicitlyWaitClickable(By locator) {

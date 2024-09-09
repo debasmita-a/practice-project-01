@@ -12,12 +12,13 @@ import com.utils.PropertiesReader;
 
 public final class Driver {
 
-	private Driver() {	}
+	private Driver() {
+	}
 
 	public static WebDriver initDriver(String browser) {
-		
+
 		System.out.println("Launching browser ::::  " + browser);
-		
+
 		if (Objects.isNull(DriverManager.getDriver())) {
 			switch (browser) {
 			case "chrome":
@@ -36,7 +37,7 @@ public final class Driver {
 			}
 		}
 
-		DriverManager.getDriver().get(PropertiesReader.get(ConfigProperties.BROWSER));
+		DriverManager.getDriver().get(PropertiesReader.get(ConfigProperties.URL));
 		DriverManager.getDriver().manage().window().maximize();
 		DriverManager.getDriver().manage().deleteAllCookies();
 

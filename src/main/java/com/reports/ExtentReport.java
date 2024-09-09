@@ -1,5 +1,6 @@
 package com.reports;
 
-public class ExtentReport {
+public final class ExtentReport {
 
+	private ExtentReport() {}
 }

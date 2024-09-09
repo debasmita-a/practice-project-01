@@ -14,10 +14,9 @@ import com.constants.FrameworkConstants;
 import com.enums.ConfigProperties;
 
 public final class PropertiesReader {
-
-	private PropertiesReader() {
-	}
-
+	
+	private PropertiesReader() {}
+	
 	private static Properties prop = new Properties();
 	private static final Map<String, String> CONFIG_MAP = new HashMap<>();
 
@@ -40,7 +39,7 @@ public final class PropertiesReader {
 	public static String get(ConfigProperties key) {
 		if(Objects.isNull(key) || Objects.isNull(prop.get(key.name().toLowerCase()))){
 			System.out.println("Property :: " + key + " is not available. Please check config.properties file.");
-		}
-		return CONFIG_MAP.get(key);
+		}		
+		return CONFIG_MAP.get(key.name().toLowerCase());
 	}
 }
