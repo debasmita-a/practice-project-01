@@ -1,7 +1,9 @@
 package com.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.enums.WaitStrategy;
 import com.utils.ElementUtil;
@@ -19,11 +21,12 @@ public class LoginPage {
 	private static By text_username = By.name("username");
 	private static By text_password = By.name("password");
 	private static By btn_login = By.xpath("//button[@type='submit']");
-	private static By footerText = By.xpath("//h5");
-	private static By link_forgottenPass = By.xpath("");
+	private static By footerText = By.xpath("//div[@class='orangehrm-copyright-wrapper']");
+	private static By link_forgottenPass = By.xpath("//div[@class='orangehrm-login-forgot']/p");
 	
 	public String getFooterText() {
-		return util.getElementText(footerText);
+		System.out.println(util.getElementText(footerText, WaitStrategy.PRESENCE));
+		return util.getElementText(footerText, WaitStrategy.PRESENCE);
 	}
 	
 	public boolean isForgottenPassLinkAvailable() {
@@ -35,22 +38,17 @@ public class LoginPage {
 	}
 	
 	public LoginPage enterUsername(String un) {
-		util.elementSendKeys(text_username, un, WaitStrategy.NONE);		
+		util.elementSendKeys(text_username, un, WaitStrategy.PRESENCE);		
 		return this;
 	}
 	
 	public LoginPage enterPassword(String pass) {
-		util.elementSendKeys(text_password, pass, WaitStrategy.NONE);
+		util.elementSendKeys(text_password, pass, WaitStrategy.PRESENCE);
 		return this;
 	}
 	
-	public LoginPage clickLoginBtn() {
-		util.elementClick(btn_login, WaitStrategy.CLICKABLE);
-		return this;
-	}
-	
-	public HomePage doLogin() {
-		
+	public HomePage clickLoginBtn(){
+		util.elementClick(btn_login, WaitStrategy.PRESENCE);
 		return new HomePage(driver);
 	}
 }

@@ -20,7 +20,8 @@ public final class LoginPageTest extends BaseTest{
 	}
 	
 	@Test
-	public void doLoginTest() {
-		loginPage.enterUsername("Admin").enterPassword("admin123").clickLoginBtn();
+	public void doLoginTest(){
+		homePage = loginPage.enterUsername("Admin").enterPassword("admin123").clickLoginBtn();
+		Assert.assertEquals(homePage.isDashboardTextAvailable(), "Dashboard");
 	}
 }

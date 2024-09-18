@@ -39,7 +39,7 @@ public final class Driver {
 
 		DriverManager.getDriver().get(PropertiesReader.get(ConfigProperties.URL));
 		DriverManager.getDriver().manage().window().maximize();
-		DriverManager.getDriver().manage().deleteAllCookies();
+		//DriverManager.getDriver().manage().deleteAllCookies();
 
 		return DriverManager.getDriver();
 	}
