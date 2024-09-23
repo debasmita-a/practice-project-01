@@ -21,11 +21,9 @@ public final class ExcelUtil {
 	
 	public static List<Map<String, String>> getData(String sheetname) {
 		List<Map<String, String>> list = null;
-		FileInputStream input = null;
 		XSSFWorkbook workbook = null;
 		
-		try {
-			input = new FileInputStream(FrameworkConstants.getExcelTestdataPath());
+		try(FileInputStream input = new FileInputStream(FrameworkConstants.getExcelTestdataPath())) {
 			workbook = new XSSFWorkbook(input);
 			XSSFSheet sheet = workbook.getSheet(sheetname);
 			
@@ -51,14 +49,6 @@ public final class ExcelUtil {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}finally {
-			try {
-				if(Objects.nonNull(input)) {
-					input.close();
-				}
-			}catch(IOException e) {
-				e.printStackTrace();
-			}
 		}
 		
 		return list;
